@@ -592,6 +592,14 @@ class CurrenciesTableSeeder extends Seeder
                 'decimal_separator' => '.',
             ],
             [
+                'name' => 'Ugandan Shilling',
+                'code' => 'UGX',
+                'symbol' => 'USh',
+                'precision' => '0',
+                'thousand_separator' => ',',
+                'decimal_separator' => '.',
+            ],
+            [
                 'name' => 'Macedonian Denar',
                 'code' => 'MKD',
                 'symbol' => 'ден',
