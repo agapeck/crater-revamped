@@ -250,6 +250,20 @@
             padding: 8px !important;
         }
 
+        .medical-info-container {
+            padding: 15px 30px;
+            margin-top: 20px;
+            background-color: #F8F8F8;
+            border-radius: 5px;
+        }
+
+        .medical-info-heading {
+            font-size: 15px;
+            padding-bottom: 10px;
+            color: #5851D8;
+        }
+        }
+
         /* -- Notes -- */
 
         .notes {
@@ -385,6 +399,8 @@
                 {!! $billing_address !!}
             @endif
         </div>
+
+        @include('app.pdf.invoice.partials.medical_info')
 
         <div class="shipping-address-container shipping-address" @if ($billing_address !== '</br>') style="float:left;" @else style="display:block; float:left: padding-left: 0px;" @endif>
             @if ($shipping_address)

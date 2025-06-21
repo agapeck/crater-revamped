@@ -233,7 +233,15 @@
     "updated_message": "Customer updated successfully",
     "address_updated_message": "Address Information Updated succesfully",
     "deleted_message": "Customer deleted successfully | Customers deleted successfully",
-    "edit_currency_not_allowed": "Cannot change currency once transactions created."
+    "edit_currency_not_allowed": "Cannot change currency once transactions created.",
+    "age": "Age",
+    "next_of_kin": "Next of Kin",
+    "next_of_kin_phone": "Next of Kin Phone",
+    "diagnosis": "Diagnosis",
+    "treatment": "Treatment",
+    "attended_by": "Attended By",
+    "review_date": "Review Date",
+    "medical_info": "Medical Information"
   },
   "items": {
     "title": "Items",

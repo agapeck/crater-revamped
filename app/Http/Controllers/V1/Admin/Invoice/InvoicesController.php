@@ -48,6 +48,11 @@ class InvoicesController extends Controller
 
         $invoice = Invoice::createInvoice($request);
 
+        if ($request->has('customer')) {
+            $customer = $invoice->customer;
+            $customer->update($request->customer);
+        }
+
         if ($request->has('invoiceSend')) {
             $invoice->send($request->subject, $request->body);
         }
@@ -82,6 +87,12 @@ class InvoicesController extends Controller
         $this->authorize('update', $invoice);
 
         $invoice = $invoice->updateInvoice($request);
+
+        // Update customer medical information if provided
+        if ($request->has('customer')) {
+            $customer = $invoice->customer;
+            $customer->update($request->customer);
+        }
 
         if (is_string($invoice)) {
             return respondJson($invoice, $invoice);

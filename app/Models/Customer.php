@@ -42,6 +42,8 @@ class Customer extends Authenticatable implements HasMedia
 
     protected $casts = [
         'enable_portal' => 'boolean',
+        'age' => 'integer',
+        'review_date' => 'date'
     ];
 
     public function getFormattedCreatedAtAttribute($value)
@@ -127,6 +129,17 @@ class Customer extends Authenticatable implements HasMedia
         }
 
         return 0;
+    }
+
+    public function hasMedicalInfo()
+    {
+        return $this->age ||
+            $this->next_of_kin ||
+            $this->next_of_kin_phone ||
+            $this->diagnosis ||
+            $this->treatment ||
+            $this->attended_by ||
+            $this->review_date;
     }
 
     public static function deleteCustomers($ids)

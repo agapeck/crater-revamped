@@ -40,6 +40,9 @@ class CustomerRequest extends FormRequest
             ],
             'phone' => [
                 'nullable',
+                'string',
+                'max:255',
+                'regex:/^([0-9\s\-\+\(\)]*)$/',
             ],
             'company_name' => [
                 'nullable',
@@ -59,6 +62,41 @@ class CustomerRequest extends FormRequest
             ],
             'currency_id' => [
                 'nullable',
+            ],
+            'age' => [
+                'nullable',
+                'integer',
+                'min:0',
+                'max:150',
+            ],
+            'next_of_kin' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'next_of_kin_phone' => [
+                'nullable',
+                'string',
+                'max:255',
+                'regex:/^([0-9\s\-\+\(\)]*)$/',
+            ],
+            'diagnosis' => [
+                'nullable',
+                'string',
+            ],
+            'treatment' => [
+                'nullable',
+                'string',
+            ],
+            'attended_by' => [
+                'nullable',
+                'string',
+                'max:255',
+            ],
+            'review_date' => [
+                'nullable',
+                'date',
+                'after_or_equal:today',
             ],
             'billing.name' => [
                 'nullable',
@@ -144,6 +182,13 @@ class CustomerRequest extends FormRequest
                 'estimate_prefix',
                 'payment_prefix',
                 'invoice_prefix',
+                'age',
+                'next_of_kin',
+                'next_of_kin_phone',
+                'diagnosis',
+                'treatment',
+                'attended_by',
+                'review_date',
             ])
             ->merge([
                 'creator_id' => $this->user()->id,
@@ -177,5 +222,20 @@ class CustomerRequest extends FormRequest
         });
 
         return $data;
+    }
+
+    public function messages()
+    {
+        return [
+            'age.integer' => 'Age must be a whole number.',
+            'age.min' => 'Age cannot be negative.',
+            'age.max' => 'Age cannot exceed 150 years.',
+            'next_of_kin.max' => 'Next of kin name cannot exceed 255 characters.',
+            'next_of_kin_phone.regex' => 'Next of kin phone number format is invalid.',
+            'next_of_kin_phone.max' => 'Next of kin phone number cannot exceed 255 characters.',
+            'attended_by.max' => 'Attended by field cannot exceed 255 characters.',
+            'review_date.date' => 'Review date must be a valid date.',
+            'review_date.after_or_equal' => 'Review date must be today or a future date.',
+        ];
     }
 }

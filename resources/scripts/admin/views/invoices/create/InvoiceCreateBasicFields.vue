@@ -57,11 +57,21 @@
         :customer-currency="invoiceStore.newInvoice.currency_id"
       />
     </BaseInputGrid>
+
+    <!-- Medical Information Fields -->
+    <div class="col-span-12">
+      <MedicalInfoFields
+        :store="invoiceStore"
+        store-prop="newInvoice"
+        :is-loading="isLoading"
+      />
+    </div>
   </div>
 </template>
 
 <script setup>
 import ExchangeRateConverter from '@/scripts/admin/components/estimate-invoice-common/ExchangeRateConverter.vue'
+import MedicalInfoFields from '@/scripts/admin/components/estimate-invoice-common/MedicalInfoFields.vue'
 import { useInvoiceStore } from '@/scripts/admin/stores/invoice'
 
 const props = defineProps({

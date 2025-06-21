@@ -34,6 +34,15 @@ export const useInvoiceStore = (useWindow = false) => {
       isFetchingInvoice: false,
 
       newInvoice: {
+        customer: {
+          age: null,
+          next_of_kin: null,
+          next_of_kin_phone: null,
+          diagnosis: null,
+          treatment: null,
+          attended_by: null,
+          review_date: null,
+        },
         ...invoiceStub(),
       },
     }),
@@ -94,6 +103,15 @@ export const useInvoiceStore = (useWindow = false) => {
     actions: {
       resetCurrentInvoice() {
         this.newInvoice = {
+          customer: {
+            age: null,
+            next_of_kin: null,
+            next_of_kin_phone: null,
+            diagnosis: null,
+            treatment: null,
+            attended_by: null,
+            review_date: null,
+          },
           ...invoiceStub(),
         }
       },

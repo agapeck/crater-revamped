@@ -652,6 +652,13 @@ class Invoice extends Model implements HasMedia
             '{INVOICE_DUE_DATE}' => $this->formattedDueDate,
             '{INVOICE_NUMBER}' => $this->invoice_number,
             '{INVOICE_REF_NUMBER}' => $this->reference_number,
+            '{CUSTOMER_AGE}' => $this->customer->age ?? '',
+            '{CUSTOMER_NEXT_OF_KIN}' => $this->customer->next_of_kin ?? '',
+            '{CUSTOMER_NEXT_OF_KIN_PHONE}' => $this->customer->next_of_kin_phone ?? '',
+            '{CUSTOMER_DIAGNOSIS}' => $this->customer->diagnosis ?? '',
+            '{CUSTOMER_TREATMENT}' => $this->customer->treatment ?? '',
+            '{CUSTOMER_ATTENDED_BY}' => $this->customer->attended_by ?? '',
+            '{CUSTOMER_REVIEW_DATE}' => $this->customer->review_date ? $this->customer->review_date->format('Y-m-d') : '',
         ];
     }
 

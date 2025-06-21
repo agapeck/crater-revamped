@@ -14,29 +14,14 @@ class CustomerResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
-            'contact_name' => $this->contact_name,
-            'company_name' => $this->company_name,
-            'website' => $this->website,
-            'enable_portal' => $this->enable_portal,
-            'currency_id' => $this->currency_id,
-            'company_id' => $this->company_id,
-            'facebook_id' => $this->facebook_id,
-            'google_id' => $this->google_id,
-            'github_id' => $this->github_id,
-            'formatted_created_at' => $this->formattedCreatedAt,
-            'avatar' => $this->avatar,
-            'prefix' => $this->prefix,
+        return array_merge(parent::toArray($request), [
             'billing' => $this->when($this->billingAddress()->exists(), function () {
                 return new AddressResource($this->billingAddress);
             }),
             'shipping' => $this->when($this->shippingAddress()->exists(), function () {
                 return new AddressResource($this->shippingAddress);
             }),
+            'formatted_review_date' => $this->getFormattedReviewDate(),
             'fields' => $this->when($this->fields()->exists(), function () {
                 return CustomFieldValueResource::collection($this->fields);
             }),
@@ -46,6 +31,15 @@ class CustomerResource extends JsonResource
             'currency' => $this->when($this->currency()->exists(), function () {
                 return new CurrencyResource($this->currency);
             }),
-        ];
+        ]);
+    }
+
+    private function getFormattedReviewDate()
+    {
+        if (!$this->review_date) {
+            return null;
+        }
+        $dateFormat = \Crater\Models\CompanySetting::getSetting('carbon_date_format', $this->company_id);
+        return \Carbon\Carbon::parse($this->review_date)->format($dateFormat);
     }
 }
